@@ -21,7 +21,6 @@ class _QuizState extends State<Quiz> {
 
   List<String> selectedAnswers = [];
   var activeScreen = 'start-screen';
-  int correctAnswer = 1;
 
   void switchScreen() {
     setState(() {
@@ -34,19 +33,12 @@ class _QuizState extends State<Quiz> {
 
     if (selectedAnswers.length == questions.length) {
       setState(() {
-        selectedAnswers = [];
         activeScreen = 'result-screen';
       });
     }
 
-    for (var i = 0; i < 5; i++) {
-      if (answer == questions[i].answer[0]) {
-        correctAnswer++;
-      }
-    }
+    
   }
-
-
 
   @override
   Widget build(BuildContext context) {
@@ -56,7 +48,10 @@ class _QuizState extends State<Quiz> {
     }
 
     if (activeScreen == 'result-screen') {
-      activeWidget = ResultScreen(correctAnswer);
+      activeWidget = ResultScreen(
+        
+        chosenAnswer: selectedAnswers,
+      );
     }
 
     return MaterialApp(
